@@ -1,84 +1,133 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <title>KALKILEO LERA</title>
+  <style>
+    .input_lera{
+    height: 35px;
+    width: 300px;
+    border-radius: 5px 5px 5px 5px;
+    }
+  </style>
+  <body>
     <center>
-        <h1>HANAMORANA FIKALKILEVANA LERA</h1>
-        <form name="formCalculToDo">
-                <table>
-                    <tr>
-                        <th><input type="radio" name="calcule" value="Addition"/> ATAO MIFANAMPY</th>
-                        <th><input type="radio" name="calcule" value="Soustraction"/> ATAO MIFANGALA</th>
-                    </tr>
-                </table>
-            </form> 
+      <h1>HANAMORANA FIKALKILEVANA LERA</h1>
+      <form name="formCalculToDo">
         <table>
-            <tr>
-                <td><label>LERA VOLOAHY</label></td>
-                <td><input id="heur_top" type="number" placeholder="Heur"/></td>
-                <td><input id="min_top" type="number" placeholder="Minute"/></td>
-            </tr>
-            <tr>
-                <td><label>LERA FAHAROA</label></td>
-                <td><input id="heur_bottom" type="number" placeholder="Heur"/></td>
-                <td><input id="min_bottom" type="number" placeholder="Minute"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td ><button id="btn_calculer" style="background: yellow;">KALKILEO</button></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><label>VALINY LERA</label></td>
-                <td><input id="heur_res" type="text" disabled placeholder="Heur"/></td>
-                <td><input id="min_res" type="text" disabled placeholder="Minute"/></td>
-            </tr>
+          <tr>
+            <th>
+              <input type="radio" name="calcule" value="Addition"/>
+              ATAO MIFANAMPY
+            </th>
+            <th>
+              <input type="radio" name="calcule" value="Soustraction"/>
+              ATAO MIFANGALA
+            </th>
+          </tr>
         </table>
+      </form>
+      <table>
+        <tr>
+          <td>
+            <label>LERA VOLOAHY</label>
+          </td>
+          <td>
+            <input id="heur_top" class="input_lera" type="text" placeholder="Heur" required/>
+          </td>
+          <td>
+            <input id="min_top" class="input_lera" type="text" placeholder="Minitra" required/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>LERA FAHAROA</label>
+          </td>
+          <td>
+            <input id="heur_bottom" class="input_lera" type="text" placeholder="Heur" required/>
+          </td>
+          <td>
+            <input id="min_bottom" class="input_lera" type="text" placeholder="Minitra" required/>
+          </td>
+        </tr>
+      </table>
     </center>
-<script>
-    // declaration var button calcul
-    var btnCalculer = document.getElementById('btn_calculer');
-    // declaration var time top
-    var heurTop = document.getElementById('heur_top');
-    var minTop = document.getElementById('min_top');
-    // declaration var time bottom
-    var heurBottom = document.getElementById('heur_bottom');
-    var minBottom = document.getElementById('min_bottom');
-    // declaration var time result
-    var heurRes = document.getElementById('heur_res');
-    var minRes = document.getElementById('min_res');
-    // declaration var forms
-    var calculToDo = document.forms['formCalculToDo']['calcule'];
+    <center>
+      <button id="btn_calculer" style="background: skyblue;height:40px;
+    padding-left:100px;padding-right:100px;border: 1px solid skyblue;
+    border-radius: 5px 5px 5px 5px;">KALKILEO
+      </button>
+    </center>
+    <center>
+      <table>
+        <tr>
+          <td>
+            <label>VALINY LERA</label>
+          </td>
+          <td>
+            <input id="heur_res" class="input_lera" type="text" disabled placeholder="Heur"/>
+          </td>
+          <td>
+            <input id="min_res" class="input_lera" type="text" disabled placeholder="Minitra"/>
+          </td>
+        </tr>
+      </table>
+    </center>
+    <script>
+        // declaration var button calcul
+        var btnCalculer = document.getElementById('btn_calculer');
+        // declaration var time top
+        var heurTop = document.getElementById('heur_top');
+        var minTop = document.getElementById('min_top');
+        // declaration var time bottom
+        var heurBottom = document.getElementById('heur_bottom');
+        var minBottom = document.getElementById('min_bottom');
+        // declaration var time result
+        var heurRes = document.getElementById('heur_res');
+        var minRes = document.getElementById('min_res');
+        // declaration var forms
+        var calculToDo = document.forms['formCalculToDo']['calcule'];
 
-    btnCalculer.onclick = function () {
-        console.log(calculToDo.value);
-        if (calculToDo.value == 'Addition') {
-            var resMin = parseInt(minTop.value) + parseInt(minBottom.value);
-            var resHeur = parseInt(heurTop.value) + parseInt(heurBottom.value);
-            // calcul addtion
-            if (resMin >= 60) {
-                resMin = resMin - 60;
-                resHeur += 1;
-            }
-        } else {
-             // calcul sustraction
-            var resMinTop = parseInt(minTop.value);
-            var resMimBottom = parseInt(minBottom.value);
-            var resHeurTop = parseInt(heurTop.value) 
-            var resHeurBottom = parseInt(heurBottom.value);
-            if (resMinTop < resMimBottom) {
-                resMinTop += 60;
-                resHeurTop -= 1;
-                var resMin = resMinTop - resMimBottom;
-                var resHeur = resHeurTop - resHeurBottom;
+        function validateInput(inputValue){
+            if (isNaN(inputValue)) {
+                alert('Nombre iany no mety');
+                return false;
             } else {
-                var resMin = resMinTop - resMimBottom;
-                var resHeur = resHeurTop - resHeurBottom;
+                return true;
             }
         }
-        heurRes.value = resHeur + "H";
-        minRes.value = resMin + "min";
-    }
+        btnCalculer.onclick = function () {
+            if (calculToDo.value == 'Addition') {
+                var resMin = parseInt(minTop.value) + parseInt(minBottom.value);
+                var resHeur = parseInt(heurTop.value) + parseInt(heurBottom.value);
+                // calcul addtion
+                if (resMin >= 60) {
+                    resMin = resMin - 60;
+                    resHeur += 1;
+                }
+            } else {
+                // calcul sustraction
+                var resMinTop = parseInt(minTop.value);
+                var resMimBottom = parseInt(minBottom.value);
+                var resHeurTop = parseInt(heurTop.value)
+                var resHeurBottom = parseInt(heurBottom.value);
+                if (resMinTop< resMimBottom) {
+                    resMinTop += 60;
+                    resHeurTop -= 1;
+                    var resMin = resMinTop - resMimBottom;
+                    var resHeur = resHeurTop - resHeurBottom;
+                } else {
+                    var resMin = resMinTop - resMimBottom;
+                    var resHeur = resHeurTop - resHeurBottom;
+                }
+            }
+            if (isNaN(resHeur) || isNaN(resMin)){
+                alert('Nombre iany no mety');
+            } else {
+                heurRes.value = resHeur + "H";
+                minRes.value = resMin + "min";
+            }
+            
+        }
     </script>
 
-</body>
+  </body>
 </html>
